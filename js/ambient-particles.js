@@ -112,7 +112,7 @@
     color: "#b4cece",
     size: 1.3,
     transparent: true,
-    opacity: 1,
+    opacity: 0.76,
     sizeAttenuation: true,
   });
   scene.add(new THREE.Points(geometry, material));
@@ -150,17 +150,15 @@
       signal = document
         .querySelector(".signal-section")
         .getBoundingClientRect();
-    const hideForImageParticles =
-      disintegration.top < innerHeight * 0.7 &&
-      disintegration.bottom > innerHeight * 0.3;
     const targetSignalAura =
       signal.top < innerHeight * 0.75 && signal.bottom > innerHeight
         ? 0.9
         : 0;
     currentSignalAura += (targetSignalAura - currentSignalAura) * 0.02;
     
-    material.opacity +=
-      ((hideForImageParticles ? 0 : 0.76) - material.opacity) * 0.09;
+    canvas.style.webkitMaskImage = `linear-gradient(to bottom, black ${disintegration.top}px, transparent ${disintegration.top + 80}px, transparent ${disintegration.bottom - 80}px, black ${disintegration.bottom}px)`;
+    canvas.style.maskImage = canvas.style.webkitMaskImage;
+
     for (let i = 0; i < pos.length; i += 3) {
       let x = from[i] + (to[i] - from[i]) * ease,
         y = from[i + 1] + (to[i + 1] - from[i + 1]) * ease,

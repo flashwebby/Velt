@@ -89,4 +89,21 @@ mm.add("(min-width: 769px) and (prefers-reduced-motion: no-preference)", () => {
     );
 });
 
+ScrollTrigger.create({
+  trigger: ".marquee-section",
+  start: "top bottom",
+  end: "bottom top",
+  onEnter: () => (document.body.style.backgroundColor = "#d1d4c9"),
+  onEnterBack: () => (document.body.style.backgroundColor = "#d1d4c9"),
+  onLeaveBack: () => (document.body.style.backgroundColor = ""),
+});
+
+ScrollTrigger.create({
+  trigger: ".signal-section",
+  start: "top center",
+  end: "bottom bottom",
+  onEnter: () => (document.body.style.backgroundColor = "#0a0a0a"),
+  onLeaveBack: () => (document.body.style.backgroundColor = "#d1d4c9"),
+});
+
 window.addEventListener("resize", () => ScrollTrigger.refresh());

@@ -13,6 +13,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: Inter, Arial, sans-serif;
+  transition: background-color 0.4s ease;
 }
 body {
   overflow-x: hidden;
@@ -126,6 +127,7 @@ body {
   font-size: 9px;
   letter-spacing: 0.12em;
   writing-mode: vertical-rl;
+  z-index: 2;
 }
 .scroll-mark i {
   display: inline-block;
@@ -246,7 +248,8 @@ body {
 .marquee-section {
   height: 260vh;
   position: relative;
-  background: #d1d4c9;
+  background: transparent;
+  z-index: 10;
   overflow: hidden;
 }
 .marquee-track {
@@ -292,10 +295,11 @@ body {
 }
 .signal-section {
   height: 250vh;
-  background: var(--ink);
+  background: transparent;
   color: var(--paper);
   position: relative;
   overflow: hidden;
+  z-index: 10;
 }
 .signal-words {
   position: absolute;
@@ -320,6 +324,7 @@ body {
   height: 48vh;
   transform: translateX(-50%);
   overflow: hidden;
+  z-index: 2;
 }
 .signal-image img {
   position: absolute;
@@ -338,10 +343,11 @@ body {
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.13em;
+  z-index: 2;
 }
 footer {
   height: 32vh;
-  background: var(--ink);
+  background: transparent;
   color: var(--paper);
   padding: 6vw;
   display: flex;
@@ -350,6 +356,12 @@ footer {
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.12em;
+  position: relative;
+  z-index: 10;
+}
+footer > * {
+  position: relative;
+  z-index: 2;
 }
 footer a {
   color: inherit;
