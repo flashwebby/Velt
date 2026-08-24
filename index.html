@@ -1,56 +1,253 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VELT — Cut for the considered wearer</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230a0a0a'/%3E%3C/svg%3E" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
-  <style>#ambient-particle-canvas{position:fixed;inset:0;z-index:5;width:100%;height:100%;pointer-events:none;opacity:.3}.collection{position:relative;z-index:8}.marquee-section{height:175vh}.marquee-track{z-index:8}.cover-card{z-index:9}.cursor{position:fixed;z-index:40;top:0;left:0;width:28px;height:28px;border:1px solid #0a0a0a;border-radius:50%;pointer-events:none;mix-blend-mode:difference;transition:width .22s ease,height .22s ease,background .22s ease}.cursor span{position:absolute;inset:9px;border-radius:50%;background:#f4f3f0}.cursor.is-active{width:56px;height:56px;background:#f4f3f0}.cursor.is-active span{display:none}@media(max-width:768px),(prefers-reduced-motion:reduce){#ambient-particle-canvas,.cursor{display:none}}@media(pointer:fine){body,a,button{cursor:none}}</style>
-</head>
-<body>
-  <div class="grain" aria-hidden="true"></div>
-  <canvas id="ambient-particle-canvas" aria-hidden="true"></canvas>
-  <div class="cursor" aria-hidden="true"><span></span></div>
-  <nav class="site-nav" aria-label="Main navigation">
-    <span>SEASON 04 / 2026</span><a class="wordmark" href="#top">VELT</a>
-    <div><button class="nav-button">MENU</button><button class="nav-button">BAG (0)</button></div>
-  </nav>
-  <main id="top">
-    <section class="hero" aria-labelledby="hero-title">
-      <p class="eyebrow hero-kicker">NEW SILHOUETTES / QUIETLY LOUD</p>
-      <h1 id="hero-title" class="hero-title">CUT FOR THE<br>CONSIDERED<br>WEARER</h1>
-      <div class="hero-model"><img src="Assets/Woman%20in%20cloth-no-bg.png" alt="Model in a grey oversized coat" /></div>
-      <p class="hero-caption">FORM FOLLOWS INSTINCT<br><span>— VELT STUDIOS</span></p>
-      <div class="scroll-mark">SCROLL TO ENTER <i></i></div>
-    </section>
-
-    <section class="collection section-pad" id="collection" aria-labelledby="collection-title">
-      <div class="section-top"><div><p class="eyebrow">01 / THE EDIT</p><h2 id="collection-title">CURRENT COLLECTION</h2></div><a href="#">VIEW ALL <span>↗</span></a></div>
-      <div class="collection-grid">
-        <article class="product-card"><!-- Temporary Unsplash placeholder: replace with original VELT photography. --><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=900&q=85" alt="Neutral overcoat" /><div class="product-meta"><div><h3>THE STRUCTURE COAT</h3><p>₹ 18,900</p></div><button>ADD TO CART</button></div></article>
-        <article class="product-card"><!-- Temporary Unsplash placeholder: replace with original VELT photography. --><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=85" alt="Black zip-up jacket" /><div class="product-meta"><div><h3>WEIGHT ZIP-UP</h3><p>₹ 9,800</p></div><button>ADD TO CART</button></div></article>
-        <article class="product-card"><!-- Temporary Unsplash placeholder: replace with original VELT photography. --><img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=900&q=85" alt="Utility jacket" /><div class="product-meta"><div><h3>FIELD BOMBER</h3><p>₹ 14,500</p></div><button>ADD TO CART</button></div></article>
-        <article class="product-card"><img src="Assets/Cloth%20stack-no-bg.png" alt="Folded VELT essentials" class="local-product" /><div class="product-meta"><div><h3>ESSENTIAL STACK</h3><p>₹ 5,400</p></div><button>ADD TO CART</button></div></article>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VELT — Cut for the considered wearer</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230a0a0a'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      #ambient-particle-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 5;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        opacity: 0.3;
+      }
+      .collection {
+        position: relative;
+        z-index: 8;
+      }
+      .marquee-section {
+        height: 175vh;
+      }
+      .marquee-track {
+        z-index: 8;
+      }
+      .cover-card {
+        z-index: 9;
+      }
+      .cursor {
+        position: fixed;
+        z-index: 40;
+        top: 0;
+        left: 0;
+        width: 28px;
+        height: 28px;
+        border: 1px solid #0a0a0a;
+        border-radius: 50%;
+        pointer-events: none;
+        mix-blend-mode: difference;
+        transition:
+          width 0.22s ease,
+          height 0.22s ease,
+          background 0.22s ease;
+      }
+      .cursor span {
+        position: absolute;
+        inset: 9px;
+        border-radius: 50%;
+        background: #f4f3f0;
+      }
+      .cursor.is-active {
+        width: 56px;
+        height: 56px;
+        background: #f4f3f0;
+      }
+      .cursor.is-active span {
+        display: none;
+      }
+      @media (max-width: 768px), (prefers-reduced-motion: reduce) {
+        #ambient-particle-canvas,
+        .cursor {
+          display: none;
+        }
+      }
+      @media (pointer: fine) {
+        body,
+        a,
+        button {
+          cursor: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <canvas id="ambient-particle-canvas" aria-hidden="true"></canvas>
+    <div class="cursor" aria-hidden="true"><span></span></div>
+    <nav class="site-nav" aria-label="Main navigation">
+      <span>SEASON 04 / 2026</span><a class="wordmark" href="#top">VELT</a>
+      <div>
+        <button class="nav-button">MENU</button
+        ><button class="nav-button">BAG (0)</button>
       </div>
-    </section>
+    </nav>
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow hero-kicker">NEW SILHOUETTES / QUIETLY LOUD</p>
+        <h1 id="hero-title" class="hero-title">
+          CUT FOR THE<br />CONSIDERED<br />WEARER
+        </h1>
+        <div class="hero-model">
+          <img
+            src="Assets/Woman%20in%20cloth-no-bg.png"
+            alt="Model in a grey oversized coat"
+          />
+        </div>
+        <p class="hero-caption">
+          FORM FOLLOWS INSTINCT<br /><span>— VELT STUDIOS</span>
+        </p>
+        <div class="scroll-mark">SCROLL TO ENTER <i></i></div>
+      </section>
 
-    <section class="particle-section" id="particles" aria-labelledby="particle-title">
-      <div class="particle-stage"><canvas id="particle-canvas"></canvas><div class="particle-copy"><p class="eyebrow">02 / MATERIAL STUDY</p><h2 id="particle-title">FORM<br>IN MOTION</h2><p>FROM WEIGHT TO AIR.<br>FROM AIR TO FORM.</p></div></div>
-      <div class="particle-fallback"><img src="Assets/man%20in%20clothes-no-bg.png" alt="Model in a zip-up and utility trousers" /><img src="Assets/women%20in%20cloth%203-no-bg.png" alt="Model in a utility jacket" /></div>
-    </section>
+      <section
+        class="collection section-pad"
+        id="collection"
+        aria-labelledby="collection-title"
+      >
+        <div class="section-top">
+          <div>
+            <p class="eyebrow">01 / THE EDIT</p>
+            <h2 id="collection-title">CURRENT COLLECTION</h2>
+          </div>
+          <a href="#">VIEW ALL <span>↗</span></a>
+        </div>
+        <div class="collection-grid">
+          <article class="product-card">
+            <!-- Temporary Unsplash placeholder: replace with original VELT photography. --><img
+              src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=900&q=85"
+              alt="Neutral overcoat"
+            />
+            <div class="product-meta">
+              <div>
+                <h3>THE STRUCTURE COAT</h3>
+                <p>₹ 18,900</p>
+              </div>
+              <button>ADD TO CART</button>
+            </div>
+          </article>
+          <article class="product-card">
+            <!-- Temporary Unsplash placeholder: replace with original VELT photography. --><img
+              src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=85"
+              alt="Black zip-up jacket"
+            />
+            <div class="product-meta">
+              <div>
+                <h3>WEIGHT ZIP-UP</h3>
+                <p>₹ 9,800</p>
+              </div>
+              <button>ADD TO CART</button>
+            </div>
+          </article>
+          <article class="product-card">
+            <!-- Temporary Unsplash placeholder: replace with original VELT photography. --><img
+              src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=900&q=85"
+              alt="Utility jacket"
+            />
+            <div class="product-meta">
+              <div>
+                <h3>FIELD BOMBER</h3>
+                <p>₹ 14,500</p>
+              </div>
+              <button>ADD TO CART</button>
+            </div>
+          </article>
+          <article class="product-card">
+            <img
+              src="Assets/Cloth%20stack-no-bg.png"
+              alt="Folded VELT essentials"
+              class="local-product"
+            />
+            <div class="product-meta">
+              <div>
+                <h3>ESSENTIAL STACK</h3>
+                <p>₹ 5,400</p>
+              </div>
+              <button>ADD TO CART</button>
+            </div>
+          </article>
+        </div>
+      </section>
 
-    <section class="marquee-section"><div class="marquee-track" aria-hidden="true">CLOTH THAT HOLDS ITS SHAPE / WORN BY THOSE WHO KNOW WHY / </div><article class="cover-card"><!-- Temporary Unsplash placeholder: replace with original VELT photography. --><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85" alt="Editorial fashion portrait" /><div><span>PRESENT COVER DESIGN</span><strong>VELT</strong></div></article></section>
+      <section
+        class="particle-section"
+        id="particles"
+        aria-labelledby="particle-title"
+      >
+        <div class="particle-stage">
+          <canvas id="particle-canvas"></canvas>
+          <div class="particle-copy">
+            <p class="eyebrow">02 / MATERIAL STUDY</p>
+            <h2 id="particle-title">FORM<br />IN MOTION</h2>
+            <p>FROM WEIGHT TO AIR.<br />FROM AIR TO FORM.</p>
+          </div>
+        </div>
+        <div class="particle-fallback">
+          <img
+            src="Assets/man%20in%20clothes-no-bg.png"
+            alt="Model in a zip-up and utility trousers"
+          /><img
+            src="Assets/women%20in%20cloth%203-no-bg.png"
+            alt="Model in a utility jacket"
+          />
+        </div>
+      </section>
 
-    <section class="signal-section" aria-labelledby="signal-title"><div class="signal-words" id="signal-title"><span>SIGNAL</span><span>MOTION</span></div><div class="signal-image"><!-- Temporary Unsplash placeholder: replace with original VELT photography. --><img class="signal-primary" src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=85" alt="Streetwear editorial" /><img class="signal-secondary" src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=1200&q=85" alt="Fashion detail" /></div><p class="signal-index">03 / REMAIN IN MOTION</p></section>
-  </main>
-  <footer><p>END OF EXPERIENCE</p><a href="#top">VELT</a><span>© 2026</span></footer>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  <script src="https://unpkg.com/split-type"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="js/particles.js"></script><script src="js/ambient-particles.js"></script><script src="js/main.js"></script><script src="js/cursor.js"></script>
-</body></html>
+      <section class="marquee-section">
+        <div class="marquee-track" aria-hidden="true">
+          CLOTH THAT HOLDS ITS SHAPE / WORN BY THOSE WHO KNOW WHY /
+        </div>
+        <article class="cover-card">
+          <!-- Temporary Unsplash placeholder: replace with original VELT photography. --><img
+            src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85"
+            alt="Editorial fashion portrait"
+          />
+          <div><span>PRESENT COVER DESIGN</span><strong>VELT</strong></div>
+        </article>
+      </section>
+
+      <section class="signal-section" aria-labelledby="signal-title">
+        <div class="signal-words" id="signal-title">
+          <span>SIGNAL</span><span>MOTION</span>
+        </div>
+        <div class="signal-image">
+          <!-- Temporary Unsplash placeholder: replace with original VELT photography. --><img
+            class="signal-primary"
+            src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=85"
+            alt="Streetwear editorial"
+          /><img
+            class="signal-secondary"
+            src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=1200&q=85"
+            alt="Fashion detail"
+          />
+        </div>
+        <p class="signal-index">03 / REMAIN IN MOTION</p>
+      </section>
+    </main>
+    <footer>
+      <p>END OF EXPERIENCE</p>
+      <a href="#top">VELT</a><span>© 2026</span>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/ambient-particles.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/cursor.js"></script>
+  </body>
+</html>
