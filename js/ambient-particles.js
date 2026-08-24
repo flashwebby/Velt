@@ -6,7 +6,7 @@
   ).matches;
   if (!canvas || !window.THREE || !enabled) return;
 
-  const count = 2200,
+  const count = 3300,
     shapes = [],
     random = new Float32Array(count * 3);
   const scene = new THREE.Scene();
@@ -16,7 +16,7 @@
     0.1,
     600,
   );
-  camera.position.z = 118;
+  camera.position.z = 100;
   const renderer = new THREE.WebGLRenderer({
     canvas,
     alpha: true,
@@ -131,6 +131,7 @@
   resize();
   addEventListener("resize", resize);
   let morph = 0;
+  let currentSignalAura = 0;
   function render(time) {
     const scroll =
         scrollY /
@@ -152,10 +153,12 @@
     const hideForImageParticles =
       disintegration.top < innerHeight * 0.7 &&
       disintegration.bottom > innerHeight * 0.3;
-    const signalAura =
-      signal.top < innerHeight * 0.75 && signal.bottom > innerHeight * 0.25
+    const targetSignalAura =
+      signal.top < innerHeight * 0.75 && signal.bottom > innerHeight
         ? 0.9
         : 0;
+    currentSignalAura += (targetSignalAura - currentSignalAura) * 0.02;
+    
     material.opacity +=
       ((hideForImageParticles ? 0 : 0.76) - material.opacity) * 0.09;
     for (let i = 0; i < pos.length; i += 3) {
@@ -170,10 +173,10 @@
         x += (dx / (distance || 1)) * cursorForce;
         y += (dy / (distance || 1)) * cursorForce;
       }
-      if (signalAura) {
+      if (currentSignalAura > 0.001) {
         const radius = Math.hypot(x, y) || 1;
-        x += (x / radius) * signalAura * 20;
-        y += (y / radius) * signalAura * 12;
+        x += (x / radius) * currentSignalAura * 20;
+        y += (y / radius) * currentSignalAura * 12;
       }
       pos[i] = x + random[i] * Math.sin(time * 0.0015 + i * 0.03) * 0.45;
       pos[i + 1] =
