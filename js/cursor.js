@@ -15,11 +15,15 @@
     targetX = event.clientX;
     targetY = event.clientY;
   });
-  document.querySelectorAll("a, button").forEach((el) => {
-    el.addEventListener("mouseenter", () => cursor.classList.add("is-active"));
-    el.addEventListener("mouseleave", () =>
-      cursor.classList.remove("is-active"),
-    );
+  document.addEventListener("mouseover", (event) => {
+    if (event.target.closest("a, button, input, select")) {
+      cursor.classList.add("is-active");
+    }
+  });
+  document.addEventListener("mouseout", (event) => {
+    if (event.target.closest("a, button, input, select")) {
+      cursor.classList.remove("is-active");
+    }
   });
   function render() {
     x += (targetX - x) * 0.24;

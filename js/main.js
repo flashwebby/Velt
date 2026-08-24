@@ -2,6 +2,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Lenis owns scroll interpolation; ScrollTrigger only observes the resulting scroll position.
 const lenis = new Lenis({ lerp: 0.085, smoothWheel: true });
+window.lenis = lenis;
 lenis.on("scroll", ScrollTrigger.update);
 gsap.ticker.add((time) => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
