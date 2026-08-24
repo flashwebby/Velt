@@ -29,77 +29,89 @@
     return out;
   };
 
-  // Cloth, tee, trousers, sphere, cube and a final VELT wordmark are all equal-sized point sets for clean morphs.
+  // Expanded, full-viewport morph shapes
+  // 0. Expansive Wave / Fabric Field
   shapes.push(
     make((i) => {
-      const x = (i % 55) - 27,
-        y = Math.floor(i / 55) - 20;
+      const cols = 66;
+      const x = ((i % cols) / (cols - 1) - 0.5) * 165;
+      const y = (Math.floor(i / cols) / (count / cols - 1) - 0.5) * 92;
       return [
-        x * 1.35,
-        y * 1.1,
-        Math.sin(x * 0.23) * 5 + Math.cos(y * 0.3) * 3,
+        x,
+        y,
+        Math.sin(x * 0.07) * 8 + Math.cos(y * 0.09) * 6,
       ];
     }),
   );
+
+  // 1. Broad Silhouetted Form & Atmosphere
   shapes.push(
     make(() => {
-      const x = (Math.random() * 2 - 1) * 34,
-        y = (Math.random() * 2 - 1) * 36,
-        body = Math.abs(x) < 19 && y < 28 && y > -34,
-        sleeve = Math.abs(x) < 34 && y > 10 && y < 30;
+      const x = (Math.random() * 2 - 1) * 80,
+        y = (Math.random() * 2 - 1) * 48,
+        body = Math.abs(x) < 42 && y < 38 && y > -44,
+        sleeve = Math.abs(x) < 76 && y > 10 && y < 36;
       return body || sleeve
-        ? [x, y, Math.sin(x * 0.2) * 2]
-        : [x * 0.35, y * 0.35, 0];
+        ? [x, y, Math.sin(x * 0.08) * 3]
+        : [x * 1.05, y * 1.05, (Math.random() - 0.5) * 8];
     }),
   );
+
+  // 2. Full-height Sculptural Trousers
   shapes.push(
     make(() => {
       const leg = Math.random() > 0.5 ? -1 : 1,
-        y = Math.random() * 68 - 34,
+        y = Math.random() * 94 - 47,
         x =
-          leg * (13 + (y > 12 ? (y - 12) * 0.22 : 0)) +
-          (Math.random() - 0.5) * 11;
-      return [x, y, Math.sin(y * 0.22) * 3];
+          leg * (26 + (y > 10 ? (y - 10) * 0.35 : 0)) +
+          (Math.random() - 0.5) * 28;
+      return [x, y, Math.sin(y * 0.1) * 5];
     }),
   );
+
+  // 3. Expansive Celestial Sphere
   shapes.push(
     make((i, n) => {
       const phi = Math.acos(1 - (2 * (i + 0.5)) / n),
         theta = Math.PI * (1 + Math.sqrt(5)) * i,
-        r = 35;
+        r = 66;
       return [
-        r * Math.cos(theta) * Math.sin(phi),
-        r * Math.sin(theta) * Math.sin(phi),
-        r * Math.cos(phi),
+        r * Math.cos(theta) * Math.sin(phi) * 1.25,
+        r * Math.sin(theta) * Math.sin(phi) * 0.95,
+        r * Math.cos(phi) * 0.7,
       ];
     }),
   );
+
+  // 4. Wide Aperture Torus / Ring
   shapes.push(
     make(() => {
-      const major = 30,
-        minor = 10,
+      const major = 58,
+        minor = 18,
         theta = Math.random() * Math.PI * 2,
         phi = Math.random() * Math.PI * 2;
       return [
-        (major + minor * Math.cos(phi)) * Math.cos(theta),
-        (major + minor * Math.cos(phi)) * Math.sin(theta),
+        (major + minor * Math.cos(phi)) * Math.cos(theta) * 1.25,
+        (major + minor * Math.cos(phi)) * Math.sin(theta) * 0.8,
         minor * Math.sin(phi),
       ];
     }),
   );
+
+  // 5. Expansive VELT Wordmark
   const word = (() => {
     const c = document.createElement("canvas");
-    c.width = 1200;
-    c.height = 280;
+    c.width = 1600;
+    c.height = 380;
     const ctx = c.getContext("2d");
-    ctx.font = "200px Anton, Arial Black, sans-serif";
-    ctx.fillText("VELT", 12, 220);
+    ctx.font = "260px Anton, Arial Black, sans-serif";
+    ctx.fillText("VELT", 24, 290);
     const data = ctx.getImageData(0, 0, c.width, c.height).data,
       coords = [];
-    for (let y = 0; y < c.height; y += 5)
-      for (let x = 0; x < c.width; x += 5)
+    for (let y = 0; y < c.height; y += 4)
+      for (let x = 0; x < c.width; x += 4)
         if (data[(y * c.width + x) * 4 + 3])
-          coords.push([x / 7.5 - 39, 25 - y / 5, 0]);
+          coords.push([x / 10 - 78, 30 - y / 5.5, 0]);
     return make((i) => coords[i % coords.length]);
   })();
   shapes.push(word);
@@ -109,10 +121,10 @@
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
   const material = new THREE.PointsMaterial({
-    color: "#b4cece",
-    size: 1.3,
+    color: "#b0cece",
+    size: 1.05,
     transparent: true,
-    opacity: 0.76,
+    opacity: 0.5,
     sizeAttenuation: true,
   });
   scene.add(new THREE.Points(geometry, material));
@@ -166,25 +178,25 @@
       const dx = x - pointer.x,
         dy = y - pointer.y,
         distance = Math.hypot(dx, dy),
-        cursorForce = Math.max(0, 1 - distance / 22) * 12;
+        cursorForce = Math.max(0, 1 - distance / 26) * 14;
       if (cursorForce) {
         x += (dx / (distance || 1)) * cursorForce;
         y += (dy / (distance || 1)) * cursorForce;
       }
       if (currentSignalAura > 0.001) {
         const radius = Math.hypot(x, y) || 1;
-        x += (x / radius) * currentSignalAura * 20;
-        y += (y / radius) * currentSignalAura * 12;
+        x += (x / radius) * currentSignalAura * 22;
+        y += (y / radius) * currentSignalAura * 14;
       }
-      pos[i] = x + random[i] * Math.sin(time * 0.0015 + i * 0.03) * 0.45;
+      pos[i] = x + random[i] * Math.sin(time * 0.0012 + i * 0.03) * 0.75;
       pos[i + 1] =
-        y + random[i + 1] * Math.cos(time * 0.0015 + i * 0.03) * 0.45;
+        y + random[i + 1] * Math.cos(time * 0.0012 + i * 0.03) * 0.75;
       pos[i + 2] =
-        z + random[i + 2] * Math.sin(time * 0.0015 + i * 0.03) * 0.45;
+        z + random[i + 2] * Math.sin(time * 0.0012 + i * 0.03) * 0.75;
     }
     geometry.attributes.position.needsUpdate = true;
-    scene.rotation.y = Math.sin(time * 0.00022) * 0.22 + scroll * 0.7;
-    scene.rotation.x = Math.cos(time * 0.00018) * 0.08;
+    scene.rotation.y = Math.sin(time * 0.0002) * 0.18 + scroll * 0.5;
+    scene.rotation.x = Math.cos(time * 0.00015) * 0.06;
     renderer.render(scene, camera);
     requestAnimationFrame(render);
   }
