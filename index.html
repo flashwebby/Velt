@@ -90,7 +90,7 @@
     <nav class="site-nav" aria-label="Main navigation">
       <span>SEASON 04 / 2026</span><a class="wordmark" href="#top">VELT</a>
       <div>
-        <button class="nav-button">MENU</button
+        <button class="nav-button" id="nav-menu-btn">MENU</button
         ><button class="nav-button" id="nav-bag-btn">BAG (0)</button>
       </div>
     </nav>
@@ -241,6 +241,151 @@
       <a href="#top">VELT</a><span>© 2026</span>
     </footer>
 
+    <!-- Menu Sidebar & Backdrop -->
+    <div class="menu-backdrop" id="menu-backdrop" aria-hidden="true"></div>
+    <aside class="menu-sidebar" id="menu-sidebar" aria-label="Main Menu" aria-hidden="true">
+      <div class="menu-header">
+        <div class="menu-title-wrap">
+          <span class="eyebrow">NAVIGATION ARCHIVE</span>
+          <h2 class="menu-title">VELT STUDIOS</h2>
+        </div>
+        <button class="menu-close-btn" id="menu-close-btn" aria-label="Close Menu">
+          <span>CLOSE</span>
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="menu-content">
+        <nav class="menu-nav-list" aria-label="Site directory">
+          <p class="menu-group-label">01 / DIRECTORY</p>
+          <a href="#top" class="menu-nav-link">
+            <span class="link-num">01</span>
+            <span class="link-name">INDEX / TOP</span>
+            <span class="link-arrow">↗</span>
+          </a>
+          <a href="#collection" class="menu-nav-link">
+            <span class="link-num">02</span>
+            <span class="link-name">CURRENT COLLECTION</span>
+            <span class="link-arrow">↗</span>
+          </a>
+          <a href="#particles" class="menu-nav-link">
+            <span class="link-num">03</span>
+            <span class="link-name">MATERIAL STUDY</span>
+            <span class="link-arrow">↗</span>
+          </a>
+          <a href="#top" class="menu-nav-link" onclick="document.querySelector('.marquee-section')?.scrollIntoView({behavior: 'smooth'})">
+            <span class="link-num">04</span>
+            <span class="link-name">COVER DESIGN</span>
+            <span class="link-arrow">↗</span>
+          </a>
+          <a href="#top" class="menu-nav-link" onclick="document.querySelector('.signal-section')?.scrollIntoView({behavior: 'smooth'})">
+            <span class="link-num">05</span>
+            <span class="link-name">SIGNAL MOTION</span>
+            <span class="link-arrow">↗</span>
+          </a>
+        </nav>
+
+        <div class="menu-divider"></div>
+
+        <div class="menu-services">
+          <p class="menu-group-label">02 / CLIENT SERVICES</p>
+          <div class="menu-services-grid">
+            <button class="menu-service-card" id="menu-your-orders-btn">
+              <div class="service-top">
+                <span class="service-badge">ORDER ARCHIVE</span>
+                <span class="service-arrow">→</span>
+              </div>
+              <strong class="service-title">YOUR ORDERS</strong>
+              <p class="service-desc">Track active shipments, view delivery timelines & order history.</p>
+            </button>
+            <a href="#collection" class="menu-service-item menu-nav-link">
+              <strong>LOOKBOOK / S04</strong>
+              <p>Explore high-res editorial campaign</p>
+            </a>
+            <a href="mailto:concierge@velt.studios" class="menu-service-item">
+              <strong>CLIENT CONCIERGE</strong>
+              <p>Direct assistance / inquiries</p>
+            </a>
+            <div class="menu-service-item">
+              <strong>SHIPPING & RETURNS</strong>
+              <p>Complimentary domestic & global freight</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-footer-meta">
+          <div class="meta-col">
+            <span class="meta-label">CURRENCY</span>
+            <span class="meta-val">INR (₹) / INDIA</span>
+          </div>
+          <div class="meta-col">
+            <span class="meta-label">STUDIO</span>
+            <span class="meta-val">MUMBAI / PARIS</span>
+          </div>
+          <div class="meta-col">
+            <span class="meta-label">EDITION</span>
+            <span class="meta-val">2026 ARCHIVE</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Orders Modal -->
+    <div class="orders-modal" id="orders-modal" aria-label="Your Orders" aria-hidden="true">
+      <div class="orders-modal-header">
+        <div>
+          <span class="eyebrow">CLIENT ARCHIVE</span>
+          <h2 class="orders-modal-title">YOUR ORDERS</h2>
+        </div>
+        <button class="orders-close-btn" id="orders-close-btn" aria-label="Close Orders Modal">
+          <span>CLOSE</span>
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="orders-modal-body">
+        <!-- Active Order Card -->
+        <div class="recent-order-card">
+          <div class="recent-order-header">
+            <div>
+              <span class="recent-order-tag">RECENT DISPATCH</span>
+              <h3 class="recent-order-id">VELT-8942-IN</h3>
+            </div>
+            <span class="status-pill status-active">IN TRANSIT</span>
+          </div>
+          <div class="recent-order-details">
+            <p><strong>ORDER PLACED:</strong> AUG 22, 2026</p>
+            <p><strong>DESTINATION:</strong> BANDRA WEST, MUMBAI</p>
+            <p><strong>PACKAGE:</strong> 1x THE STRUCTURE COAT (₹ 18,900)</p>
+          </div>
+          <div class="order-progress-bar">
+            <div class="progress-track"><div class="progress-fill" style="width: 65%;"></div></div>
+            <div class="progress-labels">
+              <span>CONFIRMED</span>
+              <span class="is-current">DISPATCHED</span>
+              <span>OUT FOR DELIVERY</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Track Another Order Lookup Form -->
+        <div class="track-lookup-box">
+          <p class="track-lookup-title">TRACK ANOTHER SHIPMENT</p>
+          <form id="order-tracking-form" class="track-form">
+            <div class="track-input-wrap">
+              <input type="text" id="order-id-input" placeholder="e.g. VELT-2026-9901" value="VELT-2026-9901" required />
+              <button type="submit" class="track-submit-btn">TRACK ORDER</button>
+            </div>
+          </form>
+          <div id="tracking-result" class="tracking-result-box" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Bag Sidebar & Backdrop -->
     <div class="bag-backdrop" id="bag-backdrop" aria-hidden="true"></div>
     <aside class="bag-sidebar" id="bag-sidebar" aria-label="Shopping Bag" aria-hidden="true">
@@ -282,6 +427,7 @@
     <script src="js/ambient-particles.js"></script>
     <script src="js/main.js"></script>
     <script src="js/cart.js"></script>
+    <script src="js/menu.js"></script>
     <script src="js/cursor.js"></script>
   </body>
 </html>
