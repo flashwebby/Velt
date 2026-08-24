@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VELT — Cut for the considered wearer</title>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230a0a0a'/%3E%3C/svg%3E"
+    <title>CATALOGUE — VELT ARCHIVE / SEASON 04</title>
+    <meta
+      name="description"
+      content="Browse the complete 52-piece VELT collection. Heavyweight outerwear, structured tailoring, sculptural knitwear and refined accessories."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,30 +22,6 @@
         z-index: -10;
         background: #0a0a0a;
         pointer-events: none;
-      }
-      #ambient-particle-canvas {
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        opacity: 0.4;
-      }
-      .collection {
-        position: relative;
-        z-index: 8;
-      }
-      .marquee-section {
-        height: 175vh;
-      }
-      .marquee-track {
-        z-index: 8;
-        color: rgba(255, 255, 255, 0.08);
-        -webkit-text-stroke: 1.2px rgba(244, 243, 240, 0.5);
-      }
-      .cover-card {
-        z-index: 9;
       }
       .cursor {
         position: fixed;
@@ -78,7 +54,6 @@
         display: none;
       }
       @media (max-width: 768px), (prefers-reduced-motion: reduce) {
-        #ambient-particle-canvas,
         .cursor {
           display: none;
         }
@@ -86,7 +61,9 @@
       @media (pointer: fine) {
         body,
         a,
-        button {
+        button,
+        input,
+        select {
           cursor: none;
         }
       }
@@ -95,161 +72,118 @@
   <body>
     <div class="site-bg" aria-hidden="true"></div>
     <div class="grain" aria-hidden="true"></div>
-    <canvas id="ambient-particle-canvas" aria-hidden="true"></canvas>
     <div class="cursor" aria-hidden="true"><span></span></div>
+
+    <!-- Main Navigation -->
     <nav class="site-nav" aria-label="Main navigation">
-      <span>SEASON 04 / 2026</span><a class="wordmark" href="#top">VELT</a>
+      <span>SEASON 04 / ARCHIVE</span>
+      <a class="wordmark" href="index.html">VELT</a>
       <div>
-        <a href="catalogue.html" class="nav-button nav-link-item">CATALOGUE</a>
+        <a href="catalogue.html" class="nav-button nav-link-item is-active" style="text-decoration: underline; text-underline-offset: 4px;">CATALOGUE</a>
         <button class="nav-button" id="nav-menu-btn">MENU</button>
         <button class="nav-button" id="nav-bag-btn">BAG (0)</button>
       </div>
     </nav>
-    <main id="top">
-      <section class="hero" aria-labelledby="hero-title">
-        <p class="eyebrow hero-kicker">NEW SILHOUETTES / QUIETLY LOUD</p>
-        <h1 id="hero-title" class="hero-title">
-          CUT FOR THE<br />CONSIDERED<br />WEARER
-        </h1>
-        <div class="hero-model">
-          <img
-            src="Assets/Woman%20in%20cloth-no-bg.png"
-            alt="Model in a grey oversized coat"
-          />
-        </div>
-        <p class="hero-caption">
-          FORM FOLLOWS INSTINCT<br /><span>— VELT STUDIOS</span>
-        </p>
-        <div class="scroll-mark">SCROLL TO ENTER <i></i></div>
-      </section>
 
-      <section
-        class="collection section-pad"
-        id="collection"
-        aria-labelledby="collection-title"
-      >
-        <div class="section-top">
-          <div>
-            <p class="eyebrow">01 / THE EDIT</p>
-            <h2 id="collection-title">CURRENT COLLECTION</h2>
-          </div>
-          <a href="catalogue.html">VIEW ALL <span>↗</span></a>
+    <main class="catalogue-main" id="top">
+      <!-- Catalogue Header Hero -->
+      <header class="catalogue-header section-pad">
+        <div class="catalogue-header-top">
+          <p class="eyebrow">01 / COMPLETE ARCHIVE</p>
+          <span class="catalogue-season-badge">SEASON 04 / 2026</span>
         </div>
-        <div class="collection-grid">
-          <article class="product-card">
-            <!-- Temporary Unsplash placeholder: replace with original VELT photography. --><img
-              src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=900&q=85"
-              alt="Neutral overcoat"
-            />
-            <div class="product-meta">
-              <div>
-                <h3>THE STRUCTURE COAT</h3>
-                <p>₹ 18,900</p>
-              </div>
-              <button>ADD TO CART</button>
-            </div>
-          </article>
-          <article class="product-card">
-            <!-- Temporary Unsplash placeholder: replace with original VELT photography. --><img
-              src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=85"
-              alt="Black zip-up jacket"
-            />
-            <div class="product-meta">
-              <div>
-                <h3>WEIGHT ZIP-UP</h3>
-                <p>₹ 9,800</p>
-              </div>
-              <button>ADD TO CART</button>
-            </div>
-          </article>
-          <article class="product-card">
-            <!-- Temporary Unsplash placeholder: replace with original VELT photography. --><img
-              src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=900&q=85"
-              alt="Utility jacket"
-            />
-            <div class="product-meta">
-              <div>
-                <h3>FIELD BOMBER</h3>
-                <p>₹ 14,500</p>
-              </div>
-              <button>ADD TO CART</button>
-            </div>
-          </article>
-          <article class="product-card">
-            <img
-              src="Assets/Cloth%20stack-no-bg.png"
-              alt="Folded VELT essentials"
-              class="local-product"
-            />
-            <div class="product-meta">
-              <div>
-                <h3>ESSENTIAL STACK</h3>
-                <p>₹ 5,400</p>
-              </div>
-              <button>ADD TO CART</button>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section
-        class="particle-section"
-        id="particles"
-        aria-labelledby="particle-title"
-      >
-        <div class="particle-stage">
-          <canvas id="particle-canvas"></canvas>
-          <div class="particle-copy">
-            <p class="eyebrow">02 / MATERIAL STUDY</p>
-            <h2 id="particle-title">FORM<br />IN MOTION</h2>
-            <p>FROM WEIGHT TO AIR.<br />FROM AIR TO FORM.</p>
+        <h1 class="catalogue-title">THE COMPLETE EDIT</h1>
+        <div class="catalogue-header-bottom">
+          <p class="catalogue-subtitle">
+            52 considered silhouettes crafted with architectural proportion, heavyweight virgin wools, bonded canvas, and technical membranes.
+          </p>
+          <div class="catalogue-stats">
+            <span class="stat-pill" id="results-count">52 PIECES</span>
+            <span class="stat-pill">IN STOCK / READY TO SHIP</span>
           </div>
         </div>
-        <div class="particle-fallback">
-          <img
-            src="Assets/man%20in%20clothes-no-bg.png"
-            alt="Model in a zip-up and utility trousers"
-          /><img
-            src="Assets/women%20in%20cloth%203-no-bg.png"
-            alt="Model in a utility jacket"
-          />
+      </header>
+
+      <!-- Filter & Controls Toolbar -->
+      <section class="catalogue-toolbar-section">
+        <div class="catalogue-toolbar">
+          <!-- Category Tabs -->
+          <div class="category-tabs" role="tablist" aria-label="Product categories">
+            <button class="category-tab is-active" data-category="all" role="tab">
+              ALL <span class="tab-count">(52)</span>
+            </button>
+            <button class="category-tab" data-category="outerwear" role="tab">
+              OUTERWEAR <span class="tab-count">(14)</span>
+            </button>
+            <button class="category-tab" data-category="tailoring" role="tab">
+              TAILORING <span class="tab-count">(10)</span>
+            </button>
+            <button class="category-tab" data-category="tops" role="tab">
+              TOPS & KNITS <span class="tab-count">(12)</span>
+            </button>
+            <button class="category-tab" data-category="trousers" role="tab">
+              TROUSERS <span class="tab-count">(10)</span>
+            </button>
+            <button class="category-tab" data-category="accessories" role="tab">
+              ACCESSORIES <span class="tab-count">(6)</span>
+            </button>
+          </div>
+
+          <!-- Search and Sort Tools -->
+          <div class="toolbar-controls">
+            <div class="search-input-wrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input
+                type="text"
+                id="catalogue-search"
+                placeholder="Search pieces, fabrics, styles..."
+                aria-label="Search catalogue"
+              />
+            </div>
+
+            <div class="sort-select-wrap">
+              <label for="catalogue-sort" class="sort-label">SORT BY:</label>
+              <select id="catalogue-sort" aria-label="Sort products">
+                <option value="featured">FEATURED</option>
+                <option value="newest">NEW RELEASES</option>
+                <option value="price-asc">PRICE: LOW TO HIGH</option>
+                <option value="price-desc">PRICE: HIGH TO LOW</option>
+                <option value="name">ALPHABETICAL</option>
+              </select>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="marquee-section">
-        <div class="marquee-track" aria-hidden="true">
-          CLOTH THAT HOLDS ITS SHAPE / WORN BY THOSE WHO KNOW WHY /
+      <!-- Products Grid -->
+      <section class="catalogue-grid-section">
+        <div class="catalogue-grid" id="catalogue-grid">
+          <!-- Dynamically injected via js/catalogue.js -->
         </div>
-        <article class="cover-card">
-          <!-- Temporary Unsplash placeholder: replace with original VELT photography. --><img
-            src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85"
-            alt="Editorial fashion portrait"
-          />
-          <div><span>PRESENT COVER DESIGN</span><strong>VELT</strong></div>
-        </article>
-      </section>
 
-      <section class="signal-section" aria-labelledby="signal-title">
-        <div class="signal-words" id="signal-title">
-          <span>SIGNAL</span><span>MOTION</span>
+        <!-- Empty State -->
+        <div class="catalogue-empty" id="catalogue-empty" style="display: none;">
+          <p class="eyebrow">NO MATCHES FOUND</p>
+          <h2 class="empty-title">NO PIECES MATCH YOUR CRITERIA</h2>
+          <p class="empty-desc">Try clearing your search query or selecting a different category filter.</p>
+          <button class="empty-reset-btn" onclick="document.getElementById('catalogue-search').value = ''; document.querySelector('.category-tab[data-category=\'all\']').click();">
+            RESET ALL FILTERS <span>↻</span>
+          </button>
         </div>
-        <div class="signal-image">
-          <!-- Temporary Unsplash placeholder: replace with original VELT photography. --><img
-            class="signal-primary"
-            src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=85"
-            alt="Streetwear editorial"
-          /><img
-            class="signal-secondary"
-            src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=1200&q=85"
-            alt="Fashion detail"
-          />
-        </div>
-        <p class="signal-index">03 / REMAIN IN MOTION</p>
       </section>
     </main>
+
+    <!-- Footer -->
     <footer>
-      <p>END OF EXPERIENCE</p>
-      <a href="#top">VELT</a><span>© 2026</span>
+      <div>
+        <p>SEASON 04 / 2026 ARCHIVE</p>
+        <p style="margin-top: 4px; color: #555;">ALL RIGHTS RESERVED — VELT STUDIOS MUMBAI / PARIS</p>
+      </div>
+      <a href="#top">VELT</a>
+      <span>© 2026</span>
     </footer>
 
     <!-- Menu Sidebar & Backdrop -->
@@ -271,34 +205,24 @@
       <div class="menu-content">
         <nav class="menu-nav-list" aria-label="Site directory">
           <p class="menu-group-label">01 / DIRECTORY</p>
-          <a href="#top" class="menu-nav-link">
+          <a href="index.html" class="menu-nav-link">
             <span class="link-num">01</span>
-            <span class="link-name">EXPERIENCE / TOP</span>
+            <span class="link-name">EXPERIENCE / HOME</span>
             <span class="link-arrow">↗</span>
           </a>
-          <a href="catalogue.html" class="menu-nav-link">
+          <a href="catalogue.html" class="menu-nav-link" style="color: #fff;">
             <span class="link-num">02</span>
             <span class="link-name">FULL CATALOGUE (52)</span>
             <span class="link-arrow">↗</span>
           </a>
-          <a href="#collection" class="menu-nav-link">
+          <a href="index.html#collection" class="menu-nav-link">
             <span class="link-num">03</span>
-            <span class="link-name">CURRENT COLLECTION</span>
+            <span class="link-name">CURATED EDIT</span>
             <span class="link-arrow">↗</span>
           </a>
-          <a href="#particles" class="menu-nav-link">
+          <a href="index.html#particles" class="menu-nav-link">
             <span class="link-num">04</span>
             <span class="link-name">MATERIAL STUDY</span>
-            <span class="link-arrow">↗</span>
-          </a>
-          <a href="#top" class="menu-nav-link" onclick="document.querySelector('.marquee-section')?.scrollIntoView({behavior: 'smooth'})">
-            <span class="link-num">05</span>
-            <span class="link-name">COVER DESIGN</span>
-            <span class="link-arrow">↗</span>
-          </a>
-          <a href="#top" class="menu-nav-link" onclick="document.querySelector('.signal-section')?.scrollIntoView({behavior: 'smooth'})">
-            <span class="link-num">05</span>
-            <span class="link-name">SIGNAL MOTION</span>
             <span class="link-arrow">↗</span>
           </a>
         </nav>
@@ -316,10 +240,6 @@
               <strong class="service-title">YOUR ORDERS</strong>
               <p class="service-desc">Track active shipments, view delivery timelines & order history.</p>
             </button>
-            <a href="#collection" class="menu-service-item menu-nav-link">
-              <strong>LOOKBOOK / S04</strong>
-              <p>Explore high-res editorial campaign</p>
-            </a>
             <a href="mailto:concierge@velt.studios" class="menu-service-item">
               <strong>CLIENT CONCIERGE</strong>
               <p>Direct assistance / inquiries</p>
@@ -341,8 +261,8 @@
             <span class="meta-val">MUMBAI / PARIS</span>
           </div>
           <div class="meta-col">
-            <span class="meta-label">EDITION</span>
-            <span class="meta-val">2026 ARCHIVE</span>
+            <span class="meta-label">DATABASE</span>
+            <span class="meta-val">SUPABASE READY</span>
           </div>
         </div>
       </div>
@@ -364,7 +284,6 @@
       </div>
 
       <div class="orders-modal-body">
-        <!-- Active Order Card -->
         <div class="recent-order-card">
           <div class="recent-order-header">
             <div>
@@ -388,7 +307,6 @@
           </div>
         </div>
 
-        <!-- Track Another Order Lookup Form -->
         <div class="track-lookup-box">
           <p class="track-lookup-title">TRACK ANOTHER SHIPMENT</p>
           <form id="order-tracking-form" class="track-form">
@@ -434,16 +352,12 @@
       </div>
     </aside>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-    <script src="https://unpkg.com/split-type"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="js/particles.js"></script>
-    <script src="js/ambient-particles.js"></script>
-    <script src="js/main.js"></script>
+    <!-- Scripts -->
+    <script src="js/products-data.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/menu.js"></script>
+    <script src="js/catalogue.js"></script>
     <script src="js/cursor.js"></script>
   </body>
 </html>
+

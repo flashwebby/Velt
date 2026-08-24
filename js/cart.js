@@ -276,4 +276,15 @@
 
   setupProductCards();
   renderCart();
+
+  // Expose global API for external scripts (like catalogue.js)
+  window.VeltCart = {
+    addToCart,
+    openBag,
+    closeBag,
+    renderCart,
+    updateQuantity,
+    removeFromCart,
+    getCart: () => cart,
+  };
 })();

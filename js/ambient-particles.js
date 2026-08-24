@@ -29,90 +29,125 @@
     return out;
   };
 
-  // Expanded, full-viewport morph shapes
-  // 0. Expansive Wave / Fabric Field
+  // Expanded, strictly centered full-viewport morph shapes with safe vertical margins
+  // 0. Expansive Centered Wave / Fabric Field
   shapes.push(
     make((i) => {
       const cols = 66;
-      const x = ((i % cols) / (cols - 1) - 0.5) * 165;
-      const y = (Math.floor(i / cols) / (count / cols - 1) - 0.5) * 92;
+      const x = ((i % cols) / (cols - 1) - 0.5) * 160;
+      const y = (Math.floor(i / cols) / (count / cols - 1) - 0.5) * 76;
       return [
         x,
         y,
-        Math.sin(x * 0.07) * 8 + Math.cos(y * 0.09) * 6,
+        Math.sin(x * 0.07) * 7 + Math.cos(y * 0.09) * 5,
       ];
     }),
   );
 
-  // 1. Broad Silhouetted Form & Atmosphere
+  // 1. Centered Silhouetted Form & Broad Atmosphere
   shapes.push(
     make(() => {
-      const x = (Math.random() * 2 - 1) * 80,
-        y = (Math.random() * 2 - 1) * 48,
-        body = Math.abs(x) < 42 && y < 38 && y > -44,
-        sleeve = Math.abs(x) < 76 && y > 10 && y < 36;
+      const x = (Math.random() * 2 - 1) * 76,
+        y = (Math.random() * 2 - 1) * 38,
+        body = Math.abs(x) < 38 && y < 32 && y > -36,
+        sleeve = Math.abs(x) < 74 && y > 6 && y < 30;
       return body || sleeve
         ? [x, y, Math.sin(x * 0.08) * 3]
-        : [x * 1.05, y * 1.05, (Math.random() - 0.5) * 8];
+        : [x, y, (Math.random() - 0.5) * 8];
     }),
   );
 
-  // 2. Full-height Sculptural Trousers
+  // 2. Centered Sculptural Trousers
   shapes.push(
     make(() => {
-      const leg = Math.random() > 0.5 ? -1 : 1,
-        y = Math.random() * 94 - 47,
+      const leg = Math.random() > 0.5 ? 1 : -1,
+        y = Math.random() * 76 - 38,
         x =
-          leg * (26 + (y > 10 ? (y - 10) * 0.35 : 0)) +
-          (Math.random() - 0.5) * 28;
-      return [x, y, Math.sin(y * 0.1) * 5];
+          leg * (22 + (y > 8 ? (y - 8) * 0.3 : 0)) +
+          (Math.random() - 0.5) * 22;
+      return [x, y, Math.sin(y * 0.1) * 4];
     }),
   );
 
-  // 3. Expansive Celestial Sphere
+  // 3. Centered Celestial Sphere
   shapes.push(
     make((i, n) => {
       const phi = Math.acos(1 - (2 * (i + 0.5)) / n),
         theta = Math.PI * (1 + Math.sqrt(5)) * i,
-        r = 66;
+        r = 54;
       return [
         r * Math.cos(theta) * Math.sin(phi) * 1.25,
-        r * Math.sin(theta) * Math.sin(phi) * 0.95,
-        r * Math.cos(phi) * 0.7,
+        r * Math.sin(theta) * Math.sin(phi) * 0.85,
+        r * Math.cos(phi) * 0.65,
       ];
     }),
   );
 
-  // 4. Wide Aperture Torus / Ring
+  // 4. Centered Torus / Ring
   shapes.push(
     make(() => {
-      const major = 58,
-        minor = 18,
+      const major = 50,
+        minor = 16,
         theta = Math.random() * Math.PI * 2,
         phi = Math.random() * Math.PI * 2;
       return [
-        (major + minor * Math.cos(phi)) * Math.cos(theta) * 1.25,
-        (major + minor * Math.cos(phi)) * Math.sin(theta) * 0.8,
+        (major + minor * Math.cos(phi)) * Math.cos(theta) * 1.2,
+        (major + minor * Math.cos(phi)) * Math.sin(theta) * 0.75,
         minor * Math.sin(phi),
       ];
     }),
   );
 
-  // 5. Expansive VELT Wordmark
+  // 5. Precisely Bounded & Centered VELT Wordmark
   const word = (() => {
     const c = document.createElement("canvas");
-    c.width = 1600;
-    c.height = 380;
+    c.width = 2000;
+    c.height = 600;
     const ctx = c.getContext("2d");
-    ctx.font = "260px Anton, Arial Black, sans-serif";
-    ctx.fillText("VELT", 24, 290);
+    ctx.font = "bold 240px Anton, Arial Black, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("VELT", c.width / 2, c.height / 2);
     const data = ctx.getImageData(0, 0, c.width, c.height).data,
-      coords = [];
-    for (let y = 0; y < c.height; y += 4)
-      for (let x = 0; x < c.width; x += 4)
-        if (data[(y * c.width + x) * 4 + 3])
-          coords.push([x / 10 - 78, 30 - y / 5.5, 0]);
-    return make((i) => coords[i % coords.length]);
+      rawCoords = [];
+
+    let minX = c.width,
+      maxX = 0,
+      minY = c.height,
+      maxY = 0;
+    for (let y = 0; y < c.height; y += 4) {
+      for (let x = 0; x < c.width; x += 4) {
+        if (data[(y * c.width + x) * 4 + 3] > 128) {
+          if (x < minX) minX = x;
+          if (x > maxX) maxX = x;
+          if (y < minY) minY = y;
+          if (y > maxY) maxY = y;
+        }
+      }
+    }
+
+    const textWidth = maxX - minX || 1;
+    const textHeight = maxY - minY || 1;
+    const targetWidth = 116; // spans -58 to +58 in 3D space
+    const targetHeight = 30; // spans -15 to +15 in 3D space
+    const scaleX = targetWidth / textWidth;
+    const scaleY = targetHeight / textHeight;
+    const centerX = (minX + maxX) / 2;
+    const centerY = (minY + maxY) / 2;
+
+    for (let y = 0; y < c.height; y += 4) {
+      for (let x = 0; x < c.width; x += 4) {
+        if (data[(y * c.width + x) * 4 + 3] > 128) {
+          rawCoords.push([
+            (x - centerX) * scaleX,
+            (centerY - y) * scaleY + 2,
+            0,
+          ]);
+        }
+      }
+    }
+
+    return make((i) => rawCoords[i % rawCoords.length]);
   })();
   shapes.push(word);
 
@@ -167,7 +202,7 @@
         ? 0.9
         : 0;
     currentSignalAura += (targetSignalAura - currentSignalAura) * 0.02;
-    
+
     canvas.style.webkitMaskImage = `linear-gradient(to bottom, black ${disintegration.top}px, transparent ${disintegration.top + 80}px, transparent ${disintegration.bottom - 80}px, black ${disintegration.bottom}px)`;
     canvas.style.maskImage = canvas.style.webkitMaskImage;
 
@@ -195,8 +230,8 @@
         z + random[i + 2] * Math.sin(time * 0.0012 + i * 0.03) * 0.75;
     }
     geometry.attributes.position.needsUpdate = true;
-    scene.rotation.y = Math.sin(time * 0.0002) * 0.18 + scroll * 0.5;
-    scene.rotation.x = Math.cos(time * 0.00015) * 0.06;
+    scene.rotation.y = Math.sin(time * 0.00025) * 0.1;
+    scene.rotation.x = Math.cos(time * 0.00018) * 0.04;
     renderer.render(scene, camera);
     requestAnimationFrame(render);
   }
