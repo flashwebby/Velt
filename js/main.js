@@ -6,6 +6,22 @@ lenis.on("scroll", ScrollTrigger.update);
 gsap.ticker.add((time) => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
 
+const siteNav = document.querySelector(".site-nav");
+let previousScroll = 0;
+
+lenis.on("scroll", ({ scroll }) => {
+  if (!siteNav) return;
+
+  const scrollDelta = scroll - previousScroll;
+  if (scroll <= 8 || scrollDelta < -2) {
+    siteNav.classList.remove("is-hidden");
+  } else if (scrollDelta > 2) {
+    siteNav.classList.add("is-hidden");
+  }
+
+  previousScroll = scroll;
+});
+
 const mm = gsap.matchMedia();
 mm.add("(min-width: 769px) and (prefers-reduced-motion: no-preference)", () => {
   // Hero depth: each visual layer moves at a deliberately different scroll rate.

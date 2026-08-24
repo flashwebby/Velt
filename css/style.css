@@ -39,6 +39,13 @@ body {
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.13em;
+  background: rgba(244, 243, 240, 0.72);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  transition: transform 0.35s ease;
+}
+.site-nav.is-hidden {
+  transform: translateY(-100%);
 }
 .site-nav > div {
   justify-self: end;
